@@ -22,9 +22,9 @@ export const pages = {
 };
 export const copy = {
   home: { eyebrow: 'HELLO, WORLD. I’M TOBI.', heading: 'Building ideas', accent: 'into something real.', projects: 'A few things I’ve built', projectsIntro: 'Small experiments. Real learning. A little bit of personality.' },
-  projects: { eyebrow: 'THE PROJECT ARCHIVE', heading: 'Made with curiosity.', intro: 'A collection of experiments in code, design, and solving everyday problems. These are sample projects while I put together my portfolio.' },
+  projects: { eyebrow: 'THE PROJECT ARCHIVE', heading: 'Projects & experiments.', intro: 'A collection of experiments in code, design, and solving everyday problems. These are sample projects while I put together my portfolio.' },
   about: { eyebrow: 'A LITTLE ABOUT ME', heading: 'Always a work in progress.', skillsHeading: 'My toolbox', educationHeading: 'Learning the foundations' },
-  contact: { eyebrow: 'LET’S CONNECT', heading: 'Good things start with a hello.', intro: 'Have a project in mind, an opportunity to share, or just want to talk code? I’d love to hear from you.' },
-  cta: { heading: 'Have something in mind?', text: 'Let’s turn a good conversation into a great idea.', label: 'Say hello' },
-  footer: 'Built with curiosity & a little caffeine.',
+  contact: { eyebrow: 'LET’S CONNECT', heading: 'Get in touch.', intro: 'Have a project in mind, an opportunity to share, or just want to talk code? I’d love to hear from you.' },
+  cta: { heading: 'Let’s talk.', text: 'Projects, opportunities, or a conversation about code.', label: 'Say hello' },
+  footer: 'React / Vite · A personal corner of the web.',
 };
