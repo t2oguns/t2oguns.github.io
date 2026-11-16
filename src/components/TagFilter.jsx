@@ -1,1 +1,20 @@
-export default function TagFilter({ tags, selected, onChange }) { return <div className="flex flex-wrap gap-2 filters" role="group" aria-label="Filter projects by technology">{['All', ...tags].map(tag => <button key={tag} aria-pressed={selected === tag} onClick={() => onChange(tag)} className={`filter transition-colors ${selected === tag ? 'selected' : ''}`}>{tag}</button>)}</div>; }
+export default function TagFilter({ tags, selected, onChange }) {
+  return (
+    <div
+      className="flex flex-wrap gap-2 filters"
+      role="group"
+      aria-label="Filter projects by technology"
+    >
+      {["All", ...tags].map((tag) => (
+        <button
+          key={tag}
+          aria-pressed={selected === tag}
+          onClick={() => onChange(tag)}
+          className={`filter transition-colors ${selected === tag ? "selected" : ""}`}
+        >
+          {tag}
+        </button>
+      ))}
+    </div>
+  );
+}

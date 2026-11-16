@@ -1,22 +1,118 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { createRoot } from 'react-dom/client';
-import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import ProjectCard from './components/ProjectCard';
-import TagFilter from './components/TagFilter';
-import SectionHeading from './components/SectionHeading';
-import { profile, copy, pages } from './data/profile';
-import { projects } from './data/projects';
-import './styles.css';
-function SocialLinks() { return <div className="social-links">{profile.socials.map(s => <a key={s.label} href={s.url} target="_blank" rel="noreferrer">{s.label} <span aria-hidden="true">↗</span></a>)}<a href={`mailto:${profile.email}`}>Email <span aria-hidden="true">↗</span></a></div>; }
-function ContactBanner() { return <section className="contact-banner reveal"><div><h2>{copy.cta.heading}</h2><p>{copy.cta.text}</p></div><Link className="button button-dark" to="/contact">{copy.cta.label} <span aria-hidden="true">↗</span></Link></section>; }
-function Home() { return <><section className="hero"><div className="hero-copy"><p className="eyebrow">PERSONAL SITE / {profile.role}</p><h1>{profile.name}<span className="name-period">.</span></h1><p className="hero-intro">{profile.intro}</p><p className="school-label"><span aria-hidden="true">✳</span> {profile.education.institution}</p><SocialLinks/></div><aside className="hero-index" aria-label="Current curiosities"><p className="eyebrow">CURRENT CURIOSITIES</p><ul><li><span>01</span> Accessible web interfaces</li><li><span>02</span> Developer tools</li><li><span>03</span> Algorithms</li></ul><Link className="text-link" to="/about">A little more about me <span aria-hidden="true">↗</span></Link></aside></section><section className="projects-section"><SectionHeading eyebrow="01 / PROJECTS" title="A few things I’ve made" description="Experiments in interfaces, algorithms, and useful tools."><Link className="text-link" to="/projects">Browse all ↗</Link></SectionHeading><p className="sample-notice"><span aria-hidden="true">ⓘ</span> These are illustrative sample projects while I put together my portfolio.</p><div className="project-grid">{projects.filter(p => p.featured).map(p => <ProjectCard key={p.id} project={p}/>)}</div></section><section className="home-about"><p className="eyebrow">02 / ABOUT</p><div><h2>Learning by building.</h2><p className="muted">{profile.bio}</p><Link className="text-link" to="/about">Background & toolbox ↗</Link></div></section><ContactBanner/></>; }
-function Projects() { const [selected, setSelected] = useState('All'); const tags = [...new Set(projects.flatMap(p => p.tags))]; const filtered = projects.filter(p => selected === 'All' || p.tags.includes(selected)); return <><div className="page-heading"><p className="eyebrow">{copy.projects.eyebrow}</p><h1>{copy.projects.heading}</h1><p className="muted">{copy.projects.intro}</p></div><TagFilter tags={tags} selected={selected} onChange={setSelected}/><p className="result-count muted" role="status">{filtered.length} {filtered.length === 1 ? 'project' : 'projects'}{selected !== 'All' && ` using ${selected}`}</p><div className="project-grid">{filtered.map(p => <ProjectCard key={p.id} project={p}/>)}</div><ContactBanner/></>; }
-function About() { return <><div className="page-heading"><p className="eyebrow">{copy.about.eyebrow}</p><h1>{copy.about.heading}</h1></div><section className="about-layout"><aside className="about-monogram"><p className="eyebrow">PROFILE / ABOUT</p><span>{profile.initials}</span><p>{profile.tagline}</p><p className="about-school">{profile.education.institution}</p></aside><div className="bio"><h2>{profile.name}</h2><p className="eyebrow">{profile.role}</p><p>{profile.bio}</p><p>{profile.interests}</p><SocialLinks/>{profile.resume && <a className="button button-primary mt-6" href={`${import.meta.env.BASE_URL}${profile.resume}`} download>Download résumé ↓</a>}</div></section><section className="content-section"><SectionHeading title={copy.about.skillsHeading}/><div className="skills-grid">{profile.skills.map((group, i) => <article className="skill-card reveal" key={group.category}><span className="skill-number">0{i + 1}</span><h3>{group.category}</h3><ul>{group.items.map(item => <li key={item}>{item}</li>)}</ul></article>)}</div></section><section className="education content-section reveal"><p className="eyebrow">{copy.about.educationHeading}</p><p className="education-school">{profile.education.institution}</p><h2>{profile.education.degree}</h2><p className="sample-notice">Degree, dates, and coursework details are placeholders.</p><p>{profile.education.dates}</p><p className="muted">{profile.education.detail}</p></section><ContactBanner/></>; }
-function Contact() { return <section className="contact-page"><div className="page-heading"><p className="eyebrow">{copy.contact.eyebrow}</p><h1>{copy.contact.heading}</h1><p className="muted">{copy.contact.intro}</p></div><a className="email-card" href={`mailto:${profile.email}`}><span><small>DROP ME A LINE</small><strong>{profile.email}</strong></span><span aria-hidden="true">↗</span></a><SocialLinks/><p className="contact-note">{profile.tagline}</p></section>; }
-function App() { const location = useLocation(); const mainRef = useRef(null); const firstLoad = useRef(true);
-  useEffect(() => { const meta = pages[location.pathname] || { title: 'Page not found · Tobi Ogunsina', description: 'Return to Tobi Ogunsina’s portfolio.' }; document.title = meta.title; document.querySelector('meta[name="description"]').content = meta.description; window.scrollTo({ top: 0, behavior: 'instant' }); if (!firstLoad.current) mainRef.current?.focus({ preventScroll: true }); firstLoad.current = false; }, [location.pathname]);
-  return <><a className="skip-link" href="#main" onClick={event => { event.preventDefault(); mainRef.current?.focus(); }}>Skip to content</a><Navbar/><main ref={mainRef} id="main" tabIndex="-1" className="container page-enter" key={location.pathname}><Routes><Route path="/" element={<Home/>}/><Route path="/projects" element={<Projects/>}/><Route path="/about" element={<About/>}/><Route path="/contact" element={<Contact/>}/><Route path="*" element={<div className="page-heading"><h1>Lost in the code?</h1><Link className="button button-primary" to="/">Back to home ↗</Link></div>}/></Routes></main><Footer/></>;
+import React from "react";
+import { createRoot } from "react-dom/client";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import ProjectCard from "./components/ProjectCard";
+import { profile } from "./data/profile";
+import { projects } from "./data/projects";
+import "./styles.css";
+
+function SocialLinks() {
+  return (
+    <div className="social-links">
+      {profile.socials.map((s) => (
+        <a key={s.label} href={s.url} target="_blank" rel="noreferrer">
+          {s.label} ↗
+        </a>
+      ))}
+    </div>
+  );
 }
-createRoot(document.getElementById('root')).render(<React.StrictMode><HashRouter><App/></HashRouter></React.StrictMode>);
+
+function App() {
+  return (
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <Navbar />
+      <main id="main" className="container">
+        <section className="hero" id="top" aria-labelledby="intro-heading">
+          <p className="eyebrow">
+            {profile.role} · {profile.education.institution}
+          </p>
+          <h1 id="intro-heading">
+            {profile.name}
+            <span className="name-period">.</span>
+          </h1>
+          <p className="hero-intro">{profile.intro}</p>
+          <SocialLinks />
+        </section>
+
+        <section
+          className="content-section"
+          id="projects"
+          aria-labelledby="projects-heading"
+        >
+          <div className="section-heading">
+            <p className="eyebrow">01 / PROJECTS</p>
+            <h2 id="projects-heading">Projects</h2>
+          </div>
+
+          <div className="project-grid">
+            {projects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </section>
+
+        <section
+          className="content-section"
+          id="about"
+          aria-labelledby="about-heading"
+        >
+          <div className="section-heading">
+            <p className="eyebrow">02 / ABOUT</p>
+            <h2 id="about-heading">About</h2>
+          </div>
+          <div className="about-content">
+            <p>{profile.bio}</p>
+            <p>{profile.interests}</p>
+            <h3>Texas A&M University</h3>
+            <p>
+              {profile.education.degree} · {profile.education.dates}
+            </p>
+            <h3>Skills</h3>
+            <div className="skills-grid">
+              {profile.skills.map((group) => (
+                <div className="skill-card" key={group.category}>
+                  <h4>{group.category}</h4>
+                  <p>{group.items.join(" · ")}</p>
+                </div>
+              ))}
+            </div>
+            {profile.resume && (
+              <a
+                className="button button-primary"
+                href={`${import.meta.env.BASE_URL}${profile.resume}`}
+                download
+              >
+                Download résumé ↓
+              </a>
+            )}
+          </div>
+        </section>
+
+        <section
+          className="content-section contact-section"
+          id="contact"
+          aria-labelledby="contact-heading"
+        >
+          <p className="eyebrow">03 / CONTACT</p>
+          <h2 id="contact-heading">Get in touch</h2>
+          <a className="email-link" href={`mailto:${profile.email}`}>
+            {profile.email} ↗
+          </a>
+          <SocialLinks />
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
