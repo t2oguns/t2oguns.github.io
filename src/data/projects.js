@@ -1,4 +1,3 @@
-// TODO: Replace all three sample projects, repository URLs, and descriptions with your work.
 // Optional image: { src: 'images/project.webp', alt: 'Describe the project screenshot' }.
 // Files in public/ use paths relative to the Vite base. liveUrl is optional.
 export const projects = [
@@ -10,7 +9,7 @@ export const projects = [
       "A language learning platform, helping combat acculturation in African diaspora communities.",
     tags: ["Next.js", "Django", "PostgreSQL", "PyTorch"],
     githubUrl: "https://github.com/t2oguns/asorolanguages/",
-    liveUrl: "app.asorolanguages.com",
+    liveUrl: "https://app.asorolanguages.com",
     featured: true,
     sample: false,
     visual: "study",
@@ -38,7 +37,7 @@ export const projects = [
     category: "03 / WEB APPLICATION",
     description:
       "An AI-powered research discovery platform that helps users explore academic papers, discover related research, and visualize connections through interactive citation networks.",
-    tags: ["Next.JS", "Next.js", "PostgreSQL"],
+    tags: ["Next.jS", "Django", "PostgreSQL"],
     githubUrl: "https://github.com/t2oguns/wangetal",
     liveUrl: null,
     featured: true,

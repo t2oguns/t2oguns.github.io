@@ -1,11 +1,9 @@
-import { resume } from "react-dom/server";
-
 export const profile = {
   name: "Tobi Ogunsina",
   initials: "to.",
   role: "Computer science student",
   tagline: "",
-  intro: "I’m Tobi, an aspiring engineer with an interest in computer science, problem solving, and philosophy. I enjoy exploring how technology influences our everyday lives, shapes human behavior, and changes the ways we interact with each other and the world.",
+  intro: "I’m Tobi, an aspiring engineer fascinated by computer science, critical thinking, and philosophy. I enjoy exploring the relationship between technology, human behavior, and the world around us.",
   email: "ogunsina04@gmail.com",
   socials: [
     { label: "GitHub", url: "https://github.com/t2oguns" },
