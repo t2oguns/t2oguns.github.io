@@ -11,7 +11,7 @@ export const profile = {
   // TODO: Replace these illustrative bio, skills, and education details with your own.
   interests: 'Lately, I’ve been exploring accessible web interfaces, developer tools, and the algorithms behind everyday applications. Outside of code, I make time for good music and new ideas.',
   skills: [{ category: 'Languages', items: ['JavaScript', 'Python', 'Java', 'HTML & CSS'] }, { category: 'Web & tools', items: ['React', 'Tailwind CSS', 'Git & GitHub', 'Vite'] }, { category: 'Foundations', items: ['Data structures', 'Algorithms', 'Accessible design', 'Problem solving'] }],
-  education: { institution: 'Your university', degree: 'B.S. in Computer Science', dates: 'Expected graduation · 2027', detail: 'Coursework in data structures, algorithms, software engineering, and computer systems.' },
+  education: { institution: 'Texas A&M University', degree: 'B.S. in Computer Science', dates: 'Expected graduation · 2027', detail: 'Coursework in data structures, algorithms, software engineering, and computer systems.' },
 };
 export const navigation = [{ label: 'Home', path: '/' }, { label: 'Projects', path: '/projects' }, { label: 'About', path: '/about' }, { label: 'Contact', path: '/contact' }];
 export const pages = {
